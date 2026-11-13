@@ -561,6 +561,89 @@ html, body {
   background-color: #F8CB66;
 }
   
+
+/* Utility rules used by the illustrated view and its dynamically rendered panels. */
+.bg-\[\#101C33\] { background-color: #101c33; }
+.bg-\[\#74B9FF\] { background-color: #74b9ff; }
+.bg-\[\#9ED29E\] { background-color: #9ed29e; }
+.bg-\[\#DFBAEE\] { background-color: #dfbaee; }
+.bg-\[\#EFE0C2\]\/60 { background-color: rgb(239 224 194 / 60%); }
+[data-theme="dark"] .bg-\[\#EFE0C2\]\/60 { background-color: var(--bg-panel); }
+.bg-\[\#F8CB66\] { background-color: #f8cb66; }
+.bg-\[\#FDF3DC\] { background-color: #fdf3dc; }
+.bg-black\/10 { background-color: rgb(0 0 0 / 10%); }
+.bg-black\/15 { background-color: rgb(0 0 0 / 15%); }
+.bg-black\/70 { background-color: rgb(0 0 0 / 70%); }
+.bg-red-700 { background-color: #b91c1c; }
+.bg-slate-600\/60 { background-color: rgb(71 85 105 / 60%); }
+.border-\[\#0B1324\] { border-color: #0b1324; }
+.border-\[\#1E2430\] { border-color: #1e2430; }
+.border-black\/20 { border-color: rgb(0 0 0 / 20%); }
+.border-black\/40 { border-color: rgb(0 0 0 / 40%); }
+.border-r { border-right-width: 1px; }
+.border-t-0 { border-top-width: 0; }
+.bottom-3 { bottom: .75rem; }
+.left-3 { left: .75rem; }
+.right-3 { right: .75rem; }
+.top-3 { top: .75rem; }
+.flex-wrap { flex-wrap: wrap; }
+.font-medium { font-weight: 500; }
+.font-extrabold { font-weight: 800; }
+.gap-3 { gap: .75rem; }
+.gap-x-3 { column-gap: .75rem; }
+.gap-y-1 { row-gap: .25rem; }
+.h-2\.5 { height: .625rem; }
+.h-3 { height: .75rem; }
+.w-2\.5 { width: .625rem; }
+.w-3 { width: .75rem; }
+.w-8 { width: 2rem; }
+.w-72 { width: 18rem; }
+.w-\[1\.5px\] { width: 1.5px; }
+.leading-\[1\.35\] { line-height: 1.35; }
+.leading-snug { line-height: 1.375; }
+.m-3 { margin: .75rem; }
+.mb-2 { margin-bottom: .5rem; }
+.mt-1\.5 { margin-top: .375rem; }
+.mt-2 { margin-top: .5rem; }
+.mx-3 { margin-inline: .75rem; }
+.p-3 { padding: .75rem; }
+.pb-1\.5 { padding-bottom: .375rem; }
+.pl-2\.5 { padding-left: .625rem; }
+.pr-1 { padding-right: .25rem; }
+.pr-2\.5 { padding-right: .625rem; }
+.pt-1\.5 { padding-top: .375rem; }
+.px-3\.5 { padding-inline: .875rem; }
+.py-0\.2 { padding-block: .05rem; }
+.py-2 { padding-block: .5rem; }
+.py-3 { padding-block: .75rem; }
+.rounded-md { border-radius: .375rem; }
+.rounded-none { border-radius: 0; }
+.shadow-sm { box-shadow: 0 1px 2px rgb(0 0 0 / 12%); }
+.space-y-2\.5 > :not([hidden]) ~ :not([hidden]) { margin-top: .625rem; }
+.text-2xl { font-size: 1.5rem; line-height: 1.2; }
+.text-base { font-size: 1rem; }
+.text-\[\#1E2430\] { color: #1e2430; }
+.text-\[\#FDF3DC\] { color: #fdf3dc; }
+.text-\[10\.5px\] { font-size: 10.5px; }
+.text-\[12px\] { font-size: 12px; }
+.text-\[9\.2px\] { font-size: 9.2px; }
+.text-amber-800 { color: #92400e; }
+.text-amber-900 { color: #78350f; }
+.text-blue-800 { color: #1e40af; }
+.text-emerald-800 { color: #065f46; }
+.text-purple-900 { color: #581c87; }
+.text-rose-700 { color: #be123c; }
+.text-sky-700 { color: #0369a1; }
+[data-theme="dark"] :is(.text-amber-800, .text-amber-900) { color: #fcd34d; }
+[data-theme="dark"] :is(.text-blue-800, .text-sky-700) { color: #7dd3fc; }
+[data-theme="dark"] .text-emerald-800 { color: #6ee7b7; }
+[data-theme="dark"] .text-rose-700 { color: #fda4af; }
+.hover\:text-blue-700:hover { color: #1d4ed8; }
+.hover\:text-red-700:hover { color: #b91c1c; }
+.hover\:underline:hover { text-decoration: underline; }
+.tracking-wide { letter-spacing: .025em; }
+@media (min-width: 640px) { .sm\:inline-block { display: inline-block; } }
+
 /* Keep controls and long identifiers readable at split-pane and mobile widths. */
 .header-cluster-group, .header-actions, .cluster-field, .canvas-layout-actions,
 .canvas-toolbar, #center-enclave-status > div, #multi-cycle-selector-wrap .flex {
@@ -573,8 +656,9 @@ html, body {
 .phase-step-btn > span:first-child { flex: none; }
 #center-enclave-status { min-width: 0; }
 .graph-stage { min-height: 205px; }
-.canvas-legend { flex-wrap: wrap; gap: 4px 8px; max-width: calc(100% - 116px); }
+.canvas-legend { flex-wrap: wrap; gap: 4px 8px; max-width: calc(100% - 148px); }
 .canvas-legend > span { white-space: nowrap; }
+#canvas-zoom-controls { display: flex; }
 .phase-story { flex-wrap: wrap; }
 .phase-story > div { flex: 1 1 225px; align-items: flex-start; }
 .phase-story p { min-width: 0; margin: 0; overflow-wrap: anywhere; }
@@ -723,9 +807,9 @@ html, body {
               <label for="tds-mode-selector" class="text-[11px] font-mono text-theme-main whitespace-nowrap font-extrabold">TDS Regime:</label>
               <select id="tds-mode-selector"
                 class="flex-1 min-w-0 surface-input px-2 py-1 text-[10.5px] font-mono">
-                <option value="STATUTORY">Sec 194Q (0.1%) / 194C (1-2%)</option>
-                <option value="UNIFORM_194C_2">Uniform 194C (2.0% Job-Work)</option>
-                <option value="GROSS_NO_TDS">Gross Payable (0% TDS)</option>
+                <option value="STATUTORY">194Q / 194C (invoice rate)</option>
+                <option value="UNIFORM_194C_2">Uniform 194C (2%)</option>
+                <option value="GROSS_NO_TDS">Gross (0% TDS)</option>
               </select>
             </div>
 
@@ -2269,11 +2353,11 @@ html, body {
   /**
    * Builds the exact RBI Two-Tier Programmable e₹ Token JSON Payload (Section 4.3)
    */
-  function buildProgrammableCbdcToken(activeRing, partnerNbfc, currentHopIndex, fsmPhase, faultState) {
+  function buildProgrammableCbdcToken(activeRing, partnerNbfc, currentHopIndex, fsmPhase, faultState, rollbackCompleted = false) {
     if (!activeRing) return null;
 
     const htlcStatus = faultState
-      ? 'TIMELOCK_EXPIRED_ROLLED_BACK'
+      ? (rollbackCompleted ? 'TIMELOCK_EXPIRED_ROLLED_BACK' : 'TIMELOCK_EXPIRED_LOCKS_HELD')
       : fsmPhase === 5
       ? 'ATOMICALLY_SETTLED_UNWRAPPED'
       : fsmPhase === 4
@@ -2297,7 +2381,7 @@ html, body {
         rbi_serial_id: activeRing.crypto.rbi_serial_id,
         issuer_bank_ifsc: partnerNbfc.issuer_bank_ifsc,
         denomination_inr: activeRing.token_denomination_inr,
-        l_bridge_retained_inr: activeRing.active_external_credit_inr,
+        l_bridge_retained_inr: rollbackCompleted ? 0 : activeRing.active_external_credit_inr,
         f_min_flash_carrier_inr: activeRing.f_min_inr,
         token_type: 'PURPOSE_AND_PATH_BOUND_CBDC'
       },
@@ -2538,8 +2622,8 @@ html, body {
       selected_ring_index: safeCycleIdx,
       active_ring: activeRing,
       telemetry,
-      buildTokenPayload: (hopIdx, phase, fault) =>
-        buildProgrammableCbdcToken(activeRing, cluster.partner_nbfc, hopIdx, phase, fault)
+      buildTokenPayload: (hopIdx, phase, fault, rollback) =>
+        buildProgrammableCbdcToken(activeRing, cluster.partner_nbfc, hopIdx, phase, fault, rollback)
     };
   }
 
@@ -3423,7 +3507,8 @@ html, body {
         }
 
         this.isPanning = true;
-        this.dragStart = { x: e.clientX - this.panX, y: e.clientY - this.panY };
+        const point = this._viewportPoint(e.clientX, e.clientY);
+        this.dragStart = { x: point.x - this.panX, y: point.y - this.panY };
       });
 
       window.addEventListener('mousemove', e => {
@@ -3438,8 +3523,9 @@ html, body {
         }
 
         if (this.isPanning) {
-          this.panX = e.clientX - this.dragStart.x;
-          this.panY = e.clientY - this.dragStart.y;
+          const point = this._viewportPoint(e.clientX, e.clientY);
+          this.panX = point.x - this.dragStart.x;
+          this.panY = point.y - this.dragStart.y;
           const viewportG = this.svg.querySelector('#graph-viewport-root');
           if (viewportG) {
             viewportG.setAttribute(
@@ -3460,28 +3546,22 @@ html, body {
         e => {
           e.preventDefault();
           const factor = e.deltaY < 0 ? 1.1 : 0.9;
-          const rect = this.svg.getBoundingClientRect();
-          const viewBox = this.svg.viewBox.baseVal;
-          const scaleX = (viewBox && viewBox.width ? viewBox.width : rect.width) / Math.max(1, rect.width);
-          const scaleY = (viewBox && viewBox.height ? viewBox.height : rect.height) / Math.max(1, rect.height);
-          const pivotX = (e.clientX - rect.left) * scaleX;
-          const pivotY = (e.clientY - rect.top) * scaleY;
+          const { x: pivotX, y: pivotY } = this._viewportPoint(e.clientX, e.clientY);
           this.zoomBy(factor, pivotX, pivotY);
         },
         { passive: false }
       );
     }
 
+    _viewportPoint(clientX, clientY) {
+      return new DOMPoint(clientX, clientY).matrixTransform(this.svg.getScreenCTM().inverse());
+    }
+
     _screenToSvg(clientX, clientY) {
-      const rect = this.svg.getBoundingClientRect();
-      const viewBox = this.svg.viewBox.baseVal;
-      const scaleX = (viewBox && viewBox.width ? viewBox.width : rect.width) / rect.width;
-      const scaleY = (viewBox && viewBox.height ? viewBox.height : rect.height) / rect.height;
-      const rawX = (clientX - rect.left) * scaleX;
-      const rawY = (clientY - rect.top) * scaleY;
+      const point = this._viewportPoint(clientX, clientY);
       return {
-        x: (rawX - this.panX) / this.zoom,
-        y: (rawY - this.panY) / this.zoom
+        x: (point.x - this.panX) / this.zoom,
+        y: (point.y - this.panY) / this.zoom
       };
     }
 
@@ -3719,7 +3799,7 @@ html, body {
           ? `L_bridge: ${formatLakhs(ring.l_bridge_inr)}  |  η: ${ring.compression_ratio_pct.toFixed(1)}%`
           : `f_min Seed: ${formatLakhs(ring.f_min_inr)}  |  Cov: ${ring.bottleneck_coverage_pct.toFixed(1)}%`;
 
-        const hubW = 336;
+        const hubW = 360;
         const hubH = 92;
 
         centralHubHtml += `
@@ -5445,7 +5525,8 @@ html, body {
       const tokenPayload = this.graphEval.buildTokenPayload(
         this.fsm.currentHopIndex,
         this.fsm.phase,
-        this.fsm.faultTriggered
+        this.fsm.faultTriggered,
+        this.fsm.rollbackCompleted
       );
       const jsonPretty = JSON.stringify(tokenPayload, null, 2);
       const isDelta = this.clearanceMode === 'FULL_RING_DELTA_BRIDGE';
@@ -5510,7 +5591,7 @@ html, body {
               <span class="text-theme-secondary font-bold">SGX Preimage Status:</span>
               ${
                 preimageVerified
-                  ? `<span class="px-2 py-0.5 pill-cr text-[9.5px]">REVEALED ✓ (${ring.crypto.preimage_raw})</span>`
+                  ? `<span class="px-2 py-0.5 pill-cr text-[9.5px]">REVEALED ✓ (${escapeHtml(ring.crypto.preimage_raw)})</span>`
                   : this.fsm.faultTriggered
                   ? `<span class="px-2 py-0.5 pill-dr text-[9.5px]">WITHHELD (TIMEOUT)</span>`
                   : `<span class="px-2 py-0.5 pill-amber text-[9.5px]">SEALED IN SGX 🔒</span>`
@@ -5561,7 +5642,8 @@ html, body {
           const payload = this.graphEval.buildTokenPayload(
             this.fsm.currentHopIndex,
             this.fsm.phase,
-            this.fsm.faultTriggered
+            this.fsm.faultTriggered,
+            this.fsm.rollbackCompleted
           );
           this._copyTextToClipboard(
             JSON.stringify(payload, null, 2),

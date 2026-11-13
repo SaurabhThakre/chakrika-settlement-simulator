@@ -650,6 +650,15 @@ html, body {
   min-width: 0;
   flex-wrap: wrap;
 }
+.canvas-panel-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.panel-visibility-btn {
+  padding: 4px 8px;
+  background: #fdf3dc;
+  color: #1e2430;
+  font-size: 11px;
+}
+#btn-focus-diagram { background: #74b9ff; }
+.panel-left[hidden], .panel-right[hidden], .diagram-focused #timeline-drawer { display: none; }
 #cluster-selector { max-width: 100%; min-width: 0; }
 #phase-stepper-container { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .phase-step-btn, [data-right-tab] { white-space: normal; }
@@ -687,6 +696,7 @@ html, body {
   .panel-center { height: auto; }
   .panel-left, .panel-right { height: auto; }
   .graph-stage { flex: none; height: clamp(260px, 48vw, 460px); }
+  .diagram-focused .graph-stage { height: max(260px, calc(100dvh - 230px)); }
 }
 @media (max-width: 600px) {
   .header-top-row, .header-stepper-row { padding-left: 9px; padding-right: 9px; }
@@ -781,7 +791,7 @@ html, body {
       <!-- -----------------------------------------------------------------------
            LEFT PANEL: Cluster Controls, Statutory Tax Filters & Invoice Table
            ----------------------------------------------------------------------- -->
-      <aside class="panel-left">
+      <aside id="invoice-panel" class="panel-left" aria-label="Invoices and clearing settings">
         <!-- Unified Control Block: Clearing Mode + Statutory TDS & ITC Filter -->
         <div class="p-3 border-b-2 border-ink space-y-2.5 bg-[#EFE0C2]/60">
           <div>
@@ -860,7 +870,7 @@ html, body {
       <!-- -----------------------------------------------------------------------
            CENTER STAGE: Interactive Illustrated Blueprint Graph Canvas & Story Banner
            ----------------------------------------------------------------------- -->
-      <section class="panel-center">
+      <section id="diagram-panel" class="panel-center" aria-label="Settlement diagram">
         <!-- Top Canvas Sub-Header: Layout Switcher & Clean Status Pills -->
         <div class="canvas-toolbar px-3 py-2 border-b-2 border-[#0B1324] bg-[#101C33] flex items-center justify-between gap-2 z-10 shrink-0">
           <div class="canvas-layout-actions flex items-center gap-2">
@@ -872,6 +882,15 @@ html, body {
               title="Reset Graph Pan/Zoom & Node Positions">
               ⌖ Fit
             </button>
+          </div>
+
+          <div class="canvas-panel-actions">
+            <button id="btn-toggle-invoices" type="button" class="tactile-btn panel-visibility-btn"
+              aria-controls="invoice-panel" aria-expanded="true">Hide invoices</button>
+            <button id="btn-toggle-inspector" type="button" class="tactile-btn panel-visibility-btn"
+              aria-controls="inspector-panel" aria-expanded="true">Hide inspector</button>
+            <button id="btn-focus-diagram" type="button" class="tactile-btn panel-visibility-btn"
+              aria-controls="invoice-panel inspector-panel">Expand diagram</button>
           </div>
 
           <div id="center-enclave-status">
@@ -936,7 +955,7 @@ html, body {
       <!-- -----------------------------------------------------------------------
            RIGHT PANEL: Context-Sensitive Inspector with 3 Clean Tabs
            ----------------------------------------------------------------------- -->
-      <aside class="panel-right">
+      <aside id="inspector-panel" class="panel-right" aria-label="Settlement inspector">
         <!-- 3-Tab Switcher Header -->
         <div class="flex border-b-2 border-ink surface-card-alt rounded-none shrink-0 overflow-hidden">
           <button type="button" data-right-tab="TELEMETRY" title="Liquidity &amp; Stakeholder Telemetry">
@@ -4358,6 +4377,7 @@ html, body {
       this.graphRenderer.setTheme(this.theme);
 
       this._bindGlobalControls();
+      this._bindPanelVisibility();
       this.fsm.initializeForGraph(this.graphEval, false);
       this._applyUrlQueryParams();
     }
@@ -4511,6 +4531,47 @@ html, body {
         this.fsm.initializeForGraph(this.graphEval, true);
       }
       this.renderAll();
+    }
+
+    _bindPanelVisibility() {
+      const invoicePanel = document.getElementById('invoice-panel');
+      const inspectorPanel = document.getElementById('inspector-panel');
+      const diagram = document.getElementById('diagram-panel');
+      const focusButton = document.getElementById('btn-focus-diagram');
+      const panels = [
+        { panel: invoicePanel, button: document.getElementById('btn-toggle-invoices'), label: 'invoices' },
+        { panel: inspectorPanel, button: document.getElementById('btn-toggle-inspector'), label: 'inspector' }
+      ];
+      let previousVisibility = null;
+
+      const syncControls = () => {
+        for (const { panel, button, label } of panels) {
+          button.setAttribute('aria-expanded', String(!panel.hidden));
+          button.textContent = `${panel.hidden ? 'Show' : 'Hide'} ${label}`;
+        }
+        const focused = panels.every(({ panel }) => panel.hidden);
+        diagram.classList.toggle('diagram-focused', focused);
+        focusButton.textContent = focused ? 'Restore panels' : 'Expand diagram';
+      };
+
+      for (const { panel, button } of panels) {
+        button.addEventListener('click', () => {
+          previousVisibility = null;
+          panel.hidden = !panel.hidden;
+          syncControls();
+        });
+      }
+
+      focusButton.addEventListener('click', () => {
+        if (panels.every(({ panel }) => panel.hidden)) {
+          panels.forEach(({ panel }, index) => { panel.hidden = previousVisibility?.[index] ?? false; });
+          previousVisibility = null;
+        } else {
+          previousVisibility = panels.map(({ panel }) => panel.hidden);
+          panels.forEach(({ panel }) => { panel.hidden = true; });
+        }
+        syncControls();
+      });
     }
 
     _bindGlobalControls() {
